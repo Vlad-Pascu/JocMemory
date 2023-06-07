@@ -10,15 +10,14 @@ using System.Windows.Forms;
 
 namespace JocMemory
 {
-    public partial class Form1 : Form
+    public partial class fMenu : Form
     {
-        Game game;
-        public Form1()
+        public fMenu()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MenuForm_Load(object sender, EventArgs e)
         {
 
         }
