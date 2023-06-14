@@ -3,7 +3,7 @@
     internal class Requirment
     {
         private string objectiveName;
-        private int objectiveNumber;
+        private int objectiveAmount;
 
         public string ObjectiveName 
         { 
@@ -13,8 +13,8 @@
 
         public int ObjectiveNumber
         {
-            get { return objectiveNumber; }
-            set { objectiveNumber = value; }
+            get { return objectiveAmount; }
+            set { objectiveAmount = value; }
         }
 
     }
