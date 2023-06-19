@@ -27,47 +27,101 @@ namespace JocMemory
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
+            lUserError.Visible = false;
+            lPasswordError.Visible = false;
+            if (NoErrorOnLogin(tbUserName.Text, tbPassword.Text) == true)
+            {
+                fMenu fMenu = new fMenu(tbUserName.Text);
+                fMenu.Show();
+                this.Hide();
+            }
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (NoErrors(tbUserName.Text, tbPassword.Text) == true)
+            lUserError.Visible = false;
+            lPasswordError.Visible = false;
+            if (NoErrorsOnRegister(tbUserName.Text, tbPassword.Text) == true)
             {
-                sqlUtility.AddPlayer(tbUserName.Text, tbPassword.Text);
+                string password = ComputeSHA256(tbPassword.Text);
+                sqlUtility.AddPlayer(tbUserName.Text, password);
             }
         }
 
-        private bool NoErrors(string username, string password)
+        private void btnGuest_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(username)==true)
+            fMenu fMenu = new fMenu("Guest");
+            fMenu.Show();
+            this.Hide();
+        }
+
+        private bool NoErrorOnLogin(string username, string password)
+        { 
+            Player player = sqlUtility.GetPlayerByUsername(tbUserName.Text);
+            if(username!=player.Username)
             {
-                lbUserError.Text = "Insert username";
-                lbUserError.Visible = true;
+                lUserError.Text = "Wrong username";
+                lUserError.Visible = true;
                 return false;
             }
-            else // trebuie modificata si prentru login + parola
+            password = ComputeSHA256(password);
+            if (password != player.Password)
             {
-                List<string> players = sqlUtility.GetAllPlayers();
-                foreach(string name in players)
-                {
-                    if(name == tbUserName.Text) 
-                    {
-                        lbUserError.Text = " Username taken";
-                        lbUserError.Visible = true;
-                        return false;
-                    }
-                }
-            }
-            if(String.IsNullOrEmpty(password) == true)
-            {
-                lPasswordError.Text= "Insert password";
+                lPasswordError.Text = "Wrong password";
                 lPasswordError.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+       
+
+        private bool NoErrorsOnRegister(string username, string password)
+        {
+            if (ValidUsername(username) == false)
+                return false;
+
+            if (String.IsNullOrEmpty(password) == true)
+            {
+                lPasswordError.Text = "Insert password";
+                lPasswordError.Visible = true;
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidPassword(string password)
+        {
+            if (String.IsNullOrEmpty(password) == true)
+            {
+                lPasswordError.Text = "Insert password";
+                lPasswordError.Visible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidUsername(string username)
+        {
+            if (String.IsNullOrEmpty(username) == true)
+            {
+                lUserError.Text = "Insert username";
+                lUserError.Visible = true;
                 return false;
             }
             else
             {
-                //check for password
+                List<string> players = sqlUtility.GetAllPlayers();
+                foreach (string name in players)
+                {
+                    if (name == tbUserName.Text)
+                    {
+                        lUserError.Text = " Username taken";
+                        lUserError.Visible = true;
+                        return false;
+                    }
+                }
             }
             return true;
         }
@@ -88,6 +142,11 @@ namespace JocMemory
             }
 
             return hash;
+        }
+
+        private void fLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

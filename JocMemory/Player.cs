@@ -4,15 +4,15 @@ namespace JocMemory
 {
     internal class Player
     {
-        private string userName;
+        private string username;
         private string password;
         private int money;
         private Quest[] quests;
 
-        public string UserName
+        public string Username
         {
-            get { return userName; }
-            set { userName = value; }
+            get { return username; }
+            set { username = value; }
         }
         public string Password
         {

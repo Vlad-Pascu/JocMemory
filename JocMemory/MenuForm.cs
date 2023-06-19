@@ -17,9 +17,21 @@ namespace JocMemory
             InitializeComponent();
         }
 
+        public fMenu(string username)
+        {
+            InitializeComponent();
+            this.lPlayerName.Text = username;
+            //this.lCoins.Text=coins;
+        }
+
         private void MenuForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

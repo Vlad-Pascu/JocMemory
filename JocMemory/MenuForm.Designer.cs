@@ -33,7 +33,8 @@
             this.btnMultiPlayer = new System.Windows.Forms.Button();
             this.btnHelpResults = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.listQuests = new System.Windows.Forms.ListView();
+            this.lCoins = new System.Windows.Forms.Label();
+            this.lPlayerName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -93,17 +94,27 @@
             this.btnExit.TabStop = false;
             this.btnExit.Text = "Exit Game";
             this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // listQuests
+            // lCoins
             // 
-            this.listQuests.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.listQuests.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listQuests.HideSelection = false;
-            this.listQuests.Location = new System.Drawing.Point(558, 263);
-            this.listQuests.Name = "listQuests";
-            this.listQuests.Size = new System.Drawing.Size(174, 264);
-            this.listQuests.TabIndex = 5;
-            this.listQuests.UseCompatibleStateImageBehavior = false;
+            this.lCoins.AutoSize = true;
+            this.lCoins.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lCoins.Location = new System.Drawing.Point(39, 37);
+            this.lCoins.Name = "lCoins";
+            this.lCoins.Size = new System.Drawing.Size(66, 27);
+            this.lCoins.TabIndex = 5;
+            this.lCoins.Text = "Coins:";
+            // 
+            // lPlayerName
+            // 
+            this.lPlayerName.AutoSize = true;
+            this.lPlayerName.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lPlayerName.Location = new System.Drawing.Point(649, 36);
+            this.lPlayerName.Name = "lPlayerName";
+            this.lPlayerName.Size = new System.Drawing.Size(67, 27);
+            this.lPlayerName.TabIndex = 6;
+            this.lPlayerName.Text = "label2";
             // 
             // fMenu
             // 
@@ -111,7 +122,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.listQuests);
+            this.Controls.Add(this.lPlayerName);
+            this.Controls.Add(this.lCoins);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnHelpResults);
             this.Controls.Add(this.btnMultiPlayer);
@@ -121,6 +133,7 @@
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -131,6 +144,7 @@
         private System.Windows.Forms.Button btnMultiPlayer;
         private System.Windows.Forms.Button btnHelpResults;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.ListView listQuests;
+        private System.Windows.Forms.Label lCoins;
+        private System.Windows.Forms.Label lPlayerName;
     }
 }

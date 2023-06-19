@@ -36,7 +36,7 @@
             this.lUserName = new System.Windows.Forms.Label();
             this.lPassword = new System.Windows.Forms.Label();
             this.lbGuest = new System.Windows.Forms.Label();
-            this.lbUserError = new System.Windows.Forms.Label();
+            this.lUserError = new System.Windows.Forms.Label();
             this.lPasswordError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -76,6 +76,7 @@
             this.btnGuest.TabIndex = 4;
             this.btnGuest.Text = "Play as Guest";
             this.btnGuest.UseVisualStyleBackColor = false;
+            this.btnGuest.Click += new System.EventHandler(this.btnGuest_Click);
             // 
             // tbUserName
             // 
@@ -124,17 +125,17 @@
             this.lbGuest.TabIndex = 11;
             this.lbGuest.Text = "Or";
             // 
-            // lbUserError
+            // lUserError
             // 
-            this.lbUserError.AutoSize = true;
-            this.lbUserError.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserError.Location = new System.Drawing.Point(296, 60);
-            this.lbUserError.Name = "lbUserError";
-            this.lbUserError.Size = new System.Drawing.Size(79, 19);
-            this.lbUserError.TabIndex = 12;
-            this.lbUserError.Text = "Empty user";
-            this.lbUserError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbUserError.Visible = false;
+            this.lUserError.AutoSize = true;
+            this.lUserError.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lUserError.Location = new System.Drawing.Point(296, 60);
+            this.lUserError.Name = "lUserError";
+            this.lUserError.Size = new System.Drawing.Size(79, 19);
+            this.lUserError.TabIndex = 12;
+            this.lUserError.Text = "Empty user";
+            this.lUserError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lUserError.Visible = false;
             // 
             // lPasswordError
             // 
@@ -154,7 +155,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(449, 361);
             this.Controls.Add(this.lPasswordError);
-            this.Controls.Add(this.lbUserError);
+            this.Controls.Add(this.lUserError);
             this.Controls.Add(this.lbGuest);
             this.Controls.Add(this.lPassword);
             this.Controls.Add(this.lUserName);
@@ -165,6 +166,7 @@
             this.Controls.Add(this.btnRegister);
             this.Name = "fLogin";
             this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fLogin_FormClosed);
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,7 +183,7 @@
         private System.Windows.Forms.Label lUserName;
         private System.Windows.Forms.Label lPassword;
         private System.Windows.Forms.Label lbGuest;
-        private System.Windows.Forms.Label lbUserError;
+        private System.Windows.Forms.Label lUserError;
         private System.Windows.Forms.Label lPasswordError;
     }
 }
