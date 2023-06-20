@@ -44,7 +44,7 @@
             // 
             this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnRegister.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(227, 204);
+            this.btnRegister.Location = new System.Drawing.Point(233, 204);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(148, 40);
             this.btnRegister.TabIndex = 2;
@@ -57,7 +57,7 @@
             // 
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnLogin.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(69, 204);
+            this.btnLogin.Location = new System.Drawing.Point(75, 204);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(148, 40);
             this.btnLogin.TabIndex = 3;
@@ -70,7 +70,7 @@
             // 
             this.btnGuest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnGuest.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuest.Location = new System.Drawing.Point(138, 277);
+            this.btnGuest.Location = new System.Drawing.Point(142, 277);
             this.btnGuest.Name = "btnGuest";
             this.btnGuest.Size = new System.Drawing.Size(164, 40);
             this.btnGuest.TabIndex = 4;
@@ -81,7 +81,7 @@
             // tbUserName
             // 
             this.tbUserName.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUserName.Location = new System.Drawing.Point(69, 84);
+            this.tbUserName.Location = new System.Drawing.Point(75, 84);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(306, 34);
             this.tbUserName.TabIndex = 7;
@@ -89,7 +89,7 @@
             // tbPassword
             // 
             this.tbPassword.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPassword.Location = new System.Drawing.Point(69, 151);
+            this.tbPassword.Location = new System.Drawing.Point(75, 151);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(306, 34);
@@ -99,7 +99,7 @@
             // 
             this.lUserName.AutoSize = true;
             this.lUserName.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lUserName.Location = new System.Drawing.Point(64, 54);
+            this.lUserName.Location = new System.Drawing.Point(68, 54);
             this.lUserName.Name = "lUserName";
             this.lUserName.Size = new System.Drawing.Size(102, 27);
             this.lUserName.TabIndex = 9;
@@ -109,7 +109,7 @@
             // 
             this.lPassword.AutoSize = true;
             this.lPassword.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lPassword.Location = new System.Drawing.Point(64, 121);
+            this.lPassword.Location = new System.Drawing.Point(68, 121);
             this.lPassword.Name = "lPassword";
             this.lPassword.Size = new System.Drawing.Size(94, 27);
             this.lPassword.TabIndex = 10;
@@ -119,7 +119,7 @@
             // 
             this.lbGuest.AutoSize = true;
             this.lbGuest.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbGuest.Location = new System.Drawing.Point(205, 247);
+            this.lbGuest.Location = new System.Drawing.Point(209, 247);
             this.lbGuest.Name = "lbGuest";
             this.lbGuest.Size = new System.Drawing.Size(36, 27);
             this.lbGuest.TabIndex = 11;
@@ -129,11 +129,10 @@
             // 
             this.lUserError.AutoSize = true;
             this.lUserError.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lUserError.Location = new System.Drawing.Point(296, 60);
+            this.lUserError.Location = new System.Drawing.Point(300, 60);
             this.lUserError.Name = "lUserError";
-            this.lUserError.Size = new System.Drawing.Size(79, 19);
+            this.lUserError.Size = new System.Drawing.Size(0, 19);
             this.lUserError.TabIndex = 12;
-            this.lUserError.Text = "Empty user";
             this.lUserError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lUserError.Visible = false;
             // 
@@ -141,7 +140,7 @@
             // 
             this.lPasswordError.AutoSize = true;
             this.lPasswordError.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lPasswordError.Location = new System.Drawing.Point(296, 127);
+            this.lPasswordError.Location = new System.Drawing.Point(300, 127);
             this.lPasswordError.Name = "lPasswordError";
             this.lPasswordError.Size = new System.Drawing.Size(0, 19);
             this.lPasswordError.TabIndex = 13;

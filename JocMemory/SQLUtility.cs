@@ -9,12 +9,13 @@ using System.Collections.Generic;
 
 namespace JocMemory
 {
-    internal class SQLUtility
+    public class SQLUtility
     {
         MySqlConnection con;
         MySqlCommand cmd;
         MySqlDataReader reader;
         MySqlDataAdapter adapter;
+        const int NO_COINS = 0;
         public void Connect()
         {
             string connString = "server=localhost;uid=root;pwd=GeNesisHalo21;database=joc_memory";
@@ -23,12 +24,13 @@ namespace JocMemory
             con.Open();
         }
 
-        const int NO_COINS = 0;
+
 
         public void AddPlayer(string username, string password)
         {
             adapter = new MySqlDataAdapter();
-            string stringSql = " INSERT INTO player (username,password,coins) VALUES ('" + username + "','" + password + "'," + NO_COINS + ")";
+            string stringSql = " INSERT INTO player (username,password,coins) " +
+                                "VALUES ('" + username + "','" + password + "'," + NO_COINS + ")";
             cmd = new MySqlCommand(stringSql, con);
             adapter.InsertCommand = cmd;
             adapter.InsertCommand.ExecuteNonQuery();
@@ -55,7 +57,7 @@ namespace JocMemory
 
         public Player GetPlayerByUsername(string name)
         {
-            Player player = new Player();
+            Player player = null;
             string stringSql = "SELECT * FROM player WHERE username = '" + name+ "'";
             cmd = new MySqlCommand(stringSql, con);
             reader = cmd.ExecuteReader();
@@ -63,6 +65,8 @@ namespace JocMemory
             {
                 while (reader.Read())
                 {
+                    player = new Player();
+                    player.PlayerId = reader.GetInt32(0);
                     player.Username= reader.GetString(1);
                     player.Password= reader.GetString(2);
                     player.Money= reader.GetInt32(3);
@@ -72,6 +76,57 @@ namespace JocMemory
             reader.Close();
             cmd.Dispose();
             return player;
+        }
+
+        internal List<Quest> GetQuestForPlayer(int playerId)
+        {
+            List<Quest> quests =new List<Quest>();
+            string stringSql = "SELECT q.questId,name, reward FROM joc_memory.player_has_quest pq " +
+                                "JOIN quest q ON pq.questId " +
+                                "WHERE pq.questId=q.questId AND playerId=" + playerId;
+            cmd= new MySqlCommand(stringSql, con);
+            reader=cmd.ExecuteReader();
+            if(reader.HasRows) 
+            {
+                while (reader.Read())
+                {
+                    Quest quest= new Quest();
+                    quest.QuestId = reader.GetInt32(0);
+                    quest.Name= reader.GetString(1);
+                    quest.Requirements = null;
+                    quest.Reward = reader.GetInt32(2);
+                    quests.Add(quest);
+                }
+            }
+            reader.Close();
+            cmd.Dispose();
+            foreach(Quest quest in quests)
+                quest.Requirements = this.GetRequirementForQuest(quest.QuestId);
+            return quests;
+        }
+
+        private List<Requirement> GetRequirementForQuest(int questId)
+        {
+            List<Requirement> requirements = new List<Requirement>();
+            string stringSql = "SELECT r.requirementId, name,amount FROM joc_memory.quest_has_requirement j " +
+                                "JOIN requirement r ON j.requirementId " +
+                                "WHERE j.requirementId=r.requirementId AND questId=" + questId;
+            cmd=new MySqlCommand(stringSql, con);
+            reader=cmd.ExecuteReader();
+            if(reader.HasRows)
+            {
+                while(reader.Read())
+                {
+                    Requirement requirement= new Requirement();
+                    requirement.RequirementId = reader.GetInt32(0);
+                    requirement.ObjectiveName = reader.GetString(1);
+                    requirement.ObjectiveAmount = reader.GetInt32(2);
+                    requirements.Add(requirement);
+                }
+            }
+            reader.Close();
+            cmd.Dispose();
+            return requirements;
         }
     }
 }

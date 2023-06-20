@@ -14,7 +14,8 @@ namespace JocMemory
 {
     public partial class fLogin : Form
     {
-        static SQLUtility sqlUtility= new SQLUtility();
+        public static fMenu fMenu= null;
+        public static SQLUtility sqlUtility= new SQLUtility();
         public fLogin()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace JocMemory
             lPasswordError.Visible = false;
             if (NoErrorOnLogin(tbUserName.Text, tbPassword.Text) == true)
             {
-                fMenu fMenu = new fMenu(tbUserName.Text);
+                fMenu = new fMenu(tbUserName.Text);
                 fMenu.Show();
                 this.Hide();
             }
@@ -50,7 +51,7 @@ namespace JocMemory
 
         private void btnGuest_Click(object sender, EventArgs e)
         {
-            fMenu fMenu = new fMenu("Guest");
+            fMenu = new fMenu("Guest");
             fMenu.Show();
             this.Hide();
         }
@@ -58,7 +59,7 @@ namespace JocMemory
         private bool NoErrorOnLogin(string username, string password)
         { 
             Player player = sqlUtility.GetPlayerByUsername(tbUserName.Text);
-            if(username!=player.Username)
+            if(player==null)
             {
                 lUserError.Text = "Wrong username";
                 lUserError.Visible = true;
@@ -80,14 +81,8 @@ namespace JocMemory
         {
             if (ValidUsername(username) == false)
                 return false;
-
-            if (String.IsNullOrEmpty(password) == true)
-            {
-                lPasswordError.Text = "Insert password";
-                lPasswordError.Visible = true;
+            if (ValidPassword(password)==false)
                 return false;
-            }
-
             return true;
         }
 

@@ -1,9 +1,18 @@
-﻿namespace JocMemory
+﻿using Org.BouncyCastle.Asn1.Mozilla;
+
+namespace JocMemory
 {
-    internal class Requirment
+    public class Requirement
     {
+        private int requirementId;
         private string objectiveName;
         private int objectiveAmount;
+
+        public int RequirementId
+        {
+            get { return requirementId; }
+            set { requirementId= value; }
+        }
 
         public string ObjectiveName 
         { 
@@ -11,7 +20,7 @@
             set { objectiveName = value; }
         }
 
-        public int ObjectiveNumber
+        public int ObjectiveAmount
         {
             get { return objectiveAmount; }
             set { objectiveAmount = value; }

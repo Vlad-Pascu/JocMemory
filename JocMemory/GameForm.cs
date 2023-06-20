@@ -18,6 +18,13 @@ namespace JocMemory
             InitializeComponent();
         }
 
+        public fGame(Game game)
+        {
+            InitializeComponent();
+            this.game = game;
+            game.Run();
+        }
+
         private void GameForm_Load(object sender, EventArgs e)
         {
 

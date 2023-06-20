@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JocMemory
 {
-    internal interface Game
+    public interface Game
     {
         void Run();
     }
