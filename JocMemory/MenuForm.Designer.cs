@@ -60,6 +60,7 @@
             this.btnSinglePlayer.TabStop = false;
             this.btnSinglePlayer.Text = "SinglePlayer";
             this.btnSinglePlayer.UseVisualStyleBackColor = false;
+            this.btnSinglePlayer.Click += new System.EventHandler(this.btnSinglePlayer_Click);
             // 
             // btnMultiPlayer
             // 

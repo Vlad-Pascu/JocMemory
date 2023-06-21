@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JocMemory
 {
-    internal class MultiPlayerGame : Game
+    internal class MultiPlayerGame 
     {
         private Board board;
         private Player player1, player2;

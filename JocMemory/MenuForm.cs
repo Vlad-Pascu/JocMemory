@@ -48,5 +48,11 @@ namespace JocMemory
             fQuests.Show();
             this.Hide();
         }
+
+        private void btnSinglePlayer_Click(object sender, EventArgs e)
+        {
+            fSingleGame fSingleGame= new fSingleGame(player);
+            this.Hide();
+        }
     }
 }

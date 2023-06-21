@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace JocMemory
 {
-    internal class Board
+    public class Board
     {
-        private Card[,] cards;
-
-        public void BuildBoard(){}
+        const int MARGINX = 30;
+        const int PADDING = 25;
+        public const int NR_CARDS = 28;
+        public Card[] cards = new Card[NR_CARDS];
+        public void BuildBoard(Panel panel, ImageList imageList)
+        {
+            int k = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    cards[k] = new Card(MARGINX + (j * (Card.LABEL_SIZE + PADDING)),
+                                        MARGINX + (i * (Card.LABEL_SIZE + PADDING)),
+                                        panel, k);
+                    cards[k].SetImageOnCard(imageList);
+                    k++;
+                }
+            }
+        }
     }
 }
