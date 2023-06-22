@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbIP = new System.Windows.Forms.TextBox();
-            this.tbPort = new System.Windows.Forms.TextBox();
+            tbIP = new System.Windows.Forms.TextBox();
+            tbPort = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnServer = new System.Windows.Forms.Button();
@@ -38,21 +38,21 @@
             // 
             // tbIP
             // 
-            this.tbIP.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIP.Location = new System.Drawing.Point(45, 106);
-            this.tbIP.Name = "tbIP";
-            this.tbIP.Size = new System.Drawing.Size(374, 34);
-            this.tbIP.TabIndex = 0;
-            this.tbIP.Text = "127.0.0.1";
+            tbIP.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tbIP.Location = new System.Drawing.Point(45, 106);
+            tbIP.Name = "tbIP";
+            tbIP.Size = new System.Drawing.Size(374, 34);
+            tbIP.TabIndex = 0;
+            tbIP.Text = "127.0.0.1";
             // 
             // tbPort
             // 
-            this.tbPort.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPort.Location = new System.Drawing.Point(45, 191);
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(374, 34);
-            this.tbPort.TabIndex = 1;
-            this.tbPort.Text = "8080";
+            tbPort.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tbPort.Location = new System.Drawing.Point(45, 191);
+            tbPort.Name = "tbPort";
+            tbPort.Size = new System.Drawing.Size(374, 34);
+            tbPort.TabIndex = 1;
+            tbPort.Text = "8080";
             // 
             // label1
             // 
@@ -110,8 +110,8 @@
             this.Controls.Add(this.btnServer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbPort);
-            this.Controls.Add(this.tbIP);
+            this.Controls.Add(tbPort);
+            this.Controls.Add(tbIP);
             this.Name = "fConnection";
             this.Text = "ConnectionForm";
             this.ResumeLayout(false);
@@ -121,8 +121,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbIP;
-        private System.Windows.Forms.TextBox tbPort;
+        public static System.Windows.Forms.TextBox tbIP;
+        public static System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnServer;

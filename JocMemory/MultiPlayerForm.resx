@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        bAEAAk1TRnQBSQFMAgEBHAEAATABAAEwAQABRgEAAUYBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        bAEAAk1TRnQBSQFMAgEBHAEAATgBAAE4AQABRgEAAUYBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABGAEBAgABMAECAgABAQEAAQgFAAGAAWQBAhcAAYACAAGAAwACgAEAAYADAAGAAQABgAEAAoACAAPA
         AQABwAHcAcABAAHwAcoBpgEAATMFAAEzAQABMwEAATMBAAIzAgADFgEAAxwBAAMiAQADKQEAA1UBAANN
         AQADQgEAAzkBAAGAAXwB/wEAAlAB/wEAAZMBAAHWAQAB/wHsAcwBAAHGAdYB7wEAAdYC5wEAAZABqQGt
@@ -1683,10 +1683,13 @@
         EQABPwL/AfgBAAEPA/8BAAj/AfwRAAE/CP8BAAj/AfwIAAEIAQABIAYAAT8I/wEACw==
 </value>
   </data>
-  <metadata name="tSwitch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="tSwitch2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>505, 17</value>
   </metadata>
   <metadata name="tHints.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>697, 17</value>
+  </metadata>
+  <metadata name="tSwitch1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>781, 17</value>
   </metadata>
 </root>

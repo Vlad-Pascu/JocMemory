@@ -37,9 +37,10 @@
             this.lScore = new System.Windows.Forms.Label();
             this.pGame = new System.Windows.Forms.Panel();
             this.listImages = new System.Windows.Forms.ImageList(this.components);
-            this.tSwitch = new System.Windows.Forms.Timer(this.components);
+            this.tSwitch2 = new System.Windows.Forms.Timer(this.components);
             this.tHints = new System.Windows.Forms.Timer(this.components);
             this.btnStart = new System.Windows.Forms.Button();
+            this.tSwitch1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lCoins
@@ -144,9 +145,10 @@
             this.listImages.Images.SetKeyName(26, "12.bmp");
             this.listImages.Images.SetKeyName(27, "13.bmp");
             // 
-            // tSwitch
+            // tSwitch2
             // 
-            this.tSwitch.Interval = 500;
+            this.tSwitch2.Interval = 1000;
+            this.tSwitch2.Tick += new System.EventHandler(this.tSwitch2_Tick);
             // 
             // tHints
             // 
@@ -164,6 +166,11 @@
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // tSwitch1
+            // 
+            this.tSwitch1.Interval = 1000;
+            this.tSwitch1.Tick += new System.EventHandler(this.tSwitch1_Tick);
             // 
             // fMultiGame
             // 
@@ -194,8 +201,9 @@
         public System.Windows.Forms.Label lScore;
         public System.Windows.Forms.Panel pGame;
         public System.Windows.Forms.ImageList listImages;
-        private System.Windows.Forms.Timer tSwitch;
+        private System.Windows.Forms.Timer tSwitch2;
         private System.Windows.Forms.Timer tHints;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Timer tSwitch1;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -63,8 +64,9 @@ namespace JocMemory
                 indexUsed[tempIndex] = 1;
                 index = tempIndex;
                 frontImage = (Bitmap)imageList.Images[index];
-                fConnection.messageSend += index.ToString() + " ";
+                fMultiGame.message += index.ToString() + " ";
                 index = index % 14;
+                Debug.Write(index + " ");
             }
             else
             {
@@ -73,6 +75,7 @@ namespace JocMemory
                 index = tempIndex;
                 frontImage= (Bitmap)imageList.Images[index];
                 index = index % 14;
+                Debug.Write(index + " ");
             }
 
         }

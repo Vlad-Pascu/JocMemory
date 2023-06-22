@@ -110,6 +110,7 @@
     <Compile Include="MultiPlayerForm.Designer.cs">
       <DependentUpon>MultiPlayerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Server.cs" />
     <Compile Include="SinglePlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>

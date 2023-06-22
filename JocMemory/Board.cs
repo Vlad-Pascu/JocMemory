@@ -15,6 +15,7 @@ namespace JocMemory
         public Card[] cards = new Card[NR_CARDS];
         public void BuildBoard(Panel panel, ImageList imageList, string cardsOrder = "")
         {
+            fMultiGame.message = "Tabla ";
             int k = 0;
             string[] data = null;
             if (cardsOrder!="")
