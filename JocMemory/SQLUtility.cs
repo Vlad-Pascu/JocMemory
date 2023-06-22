@@ -15,7 +15,7 @@ namespace JocMemory
         MySqlCommand cmd;
         MySqlDataReader reader;
         MySqlDataAdapter adapter;
-        const int NO_COINS = 0;
+        const int START_COINS = 500;
         public void Connect()
         {
             string connString = "server=localhost;uid=root;pwd=GeNesisHalo21;database=joc_memory";
@@ -30,7 +30,7 @@ namespace JocMemory
         {
             adapter = new MySqlDataAdapter();
             string stringSql = " INSERT INTO player (username,password,coins) " +
-                                "VALUES ('" + username + "','" + password + "'," + NO_COINS + ")";
+                                "VALUES ('" + username + "','" + password + "'," + START_COINS + ")";
             cmd = new MySqlCommand(stringSql, con);
             adapter.InsertCommand = cmd;
             adapter.InsertCommand.ExecuteNonQuery();
@@ -78,7 +78,7 @@ namespace JocMemory
             return player;
         }
 
-        internal List<Quest> GetQuestForPlayer(int playerId)
+        public List<Quest> GetQuestForPlayer(int playerId)
         {
             List<Quest> quests =new List<Quest>();
             string stringSql = "SELECT q.questId,name, reward FROM joc_memory.player_has_quest pq " +
@@ -105,7 +105,7 @@ namespace JocMemory
             return quests;
         }
 
-        private List<Requirement> GetRequirementForQuest(int questId)
+        public List<Requirement> GetRequirementForQuest(int questId)
         {
             List<Requirement> requirements = new List<Requirement>();
             string stringSql = "SELECT r.requirementId, name,amount FROM joc_memory.quest_has_requirement j " +
@@ -127,6 +127,29 @@ namespace JocMemory
             reader.Close();
             cmd.Dispose();
             return requirements;
+        }
+
+        public void UpdatePlayerCoins(Player player)
+        {
+            adapter = new MySqlDataAdapter();
+            string stringSql = "UPDATE player " +
+                               "SET player.coins=" + player.Money +
+                               " WHERE player.playerId=" + player.PlayerId;
+            cmd=new MySqlCommand(stringSql, con);
+            adapter.UpdateCommand = cmd;
+            adapter.UpdateCommand.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+        public void AddSinglePlayerResult(int playerId, int score, int time)
+        {
+            adapter=new MySqlDataAdapter();
+            string stringSql= " INSERT INTO singleplayer_result (playerId,score,time) " +
+                                "VALUES (" + playerId + "," + score + "," + time + ")";
+            cmd=new MySqlCommand(stringSql, con);
+            adapter.InsertCommand= cmd;
+            adapter.InsertCommand.ExecuteNonQuery();
+            cmd.Dispose();
         }
     }
 }

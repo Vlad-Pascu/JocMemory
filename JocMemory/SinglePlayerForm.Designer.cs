@@ -38,6 +38,8 @@
             this.lCoins = new System.Windows.Forms.Label();
             this.listImages = new System.Windows.Forms.ImageList(this.components);
             this.tSwitch = new System.Windows.Forms.Timer(this.components);
+            this.tSeconds = new System.Windows.Forms.Timer(this.components);
+            this.tHints = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // pGame
@@ -73,6 +75,7 @@
             this.btnHints.TabStop = false;
             this.btnHints.Text = "Hint";
             this.btnHints.UseVisualStyleBackColor = false;
+            this.btnHints.Click += new System.EventHandler(this.btnHints_Click);
             // 
             // btnQuit
             // 
@@ -143,8 +146,18 @@
             // 
             // tSwitch
             // 
-            this.tSwitch.Interval = 1500;
+            this.tSwitch.Interval = 500;
             this.tSwitch.Tick += new System.EventHandler(this.tSwitch_Tick);
+            // 
+            // tSeconds
+            // 
+            this.tSeconds.Interval = 1000;
+            this.tSeconds.Tick += new System.EventHandler(this.tSeconds_Tick);
+            // 
+            // tHints
+            // 
+            this.tHints.Interval = 1500;
+            this.tHints.Tick += new System.EventHandler(this.tHints_Tick);
             // 
             // fSingleGame
             // 
@@ -174,7 +187,9 @@
         private System.Windows.Forms.Label lPlayerName;
         private System.Windows.Forms.Label lCoins;
         public System.Windows.Forms.ImageList listImages;
-        public System.Windows.Forms.Timer tSwitch;
+        private System.Windows.Forms.Timer tSeconds;
+        private System.Windows.Forms.Timer tSwitch;
+        private System.Windows.Forms.Timer tHints;
     }
 }
 

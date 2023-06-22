@@ -88,6 +88,13 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="EndGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EndGameForm.Designer.cs">
+      <DependentUpon>EndGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EndGameStats.cs" />
     <Compile Include="SinglePlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +126,9 @@
     </Compile>
     <Compile Include="Requirement.cs" />
     <Compile Include="SQLUtility.cs" />
+    <EmbeddedResource Include="EndGameForm.resx">
+      <DependentUpon>EndGameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

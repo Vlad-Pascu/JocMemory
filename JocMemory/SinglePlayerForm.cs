@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Ess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,16 @@ namespace JocMemory
     {
         const int READY_FOR_CHECK = 2;
         const int NEW_CARD = -1;
+        const int HINT_COST = 100;
         Card c1, c2;
         private Board board = new Board();
         int labelsClicked = 0;
         int score = 0;
+        bool[] cardsTurned = new bool[Board.NR_CARDS];
         Player player;
+        int moves = 0;
+        int time = 0;
+        int multiplayer = 0;
         public fSingleGame()
         {
             InitializeComponent();
@@ -39,7 +45,7 @@ namespace JocMemory
             {
                 card.Label.Click += new EventHandler(Run);
             }
-
+            tSeconds.Start();
         }
 
         public void Run(object sender, EventArgs e)
@@ -64,18 +70,21 @@ namespace JocMemory
             if (labelsClicked == READY_FOR_CHECK)
             {
                 BlockCards();
-                GameEnded();
                 if (c1.Index != NEW_CARD && c2.Index != NEW_CARD && c1.Index == c2.Index)
                 {
+                    cardsTurned[(int)c1.Label.Tag] = true;
+                    cardsTurned[(int)c2.Label.Tag] = true;
                     c1 = new Card();
                     c2 = new Card();
                     score++;
                     lScore.Text = "Score : " + score.ToString();
                 }
                 else
-                    tSwitch.Enabled = true;
+                    tSwitch.Start();
                 UnblockCards();
                 labelsClicked = 0;
+                moves++;
+                GameEnded();
             }
         }
 
@@ -93,16 +102,21 @@ namespace JocMemory
 
         private void GameEnded()
         {
-            foreach (Card card in board.cards)
+            foreach (bool b in cardsTurned)
             {
-                if (card.Label.Image != card.FrontImage)
+                if (b == false)
                     return;
             }
+            tSeconds.Stop();
+            EndGameStats endGameStats = new EndGameStats(moves,time,score,multiplayer);
+            fEndGame fEndGame = new fEndGame(player, endGameStats);
+            this.Close();
             //form result final plus verificare quest-uri
         }
 
         private void tSwitch_Tick(object sender, EventArgs e)
         {
+            tSwitch.Stop();
             board.cards[(int)c1.Label.Tag].Label.Image = board.cards[(int)c1.Label.Tag].BackImage;
             board.cards[(int)c2.Label.Tag].Label.Image = board.cards[(int)c2.Label.Tag].BackImage;
             c1.Label.Enabled = true;
@@ -110,7 +124,38 @@ namespace JocMemory
             c1 = new Card();
             c2 = new Card();
             c1.Index = c2.Index = -1;
-            tSwitch.Enabled = false;
+        }
+
+        private void btnHints_Click(object sender, EventArgs e)
+        {
+            if (player.Money >= HINT_COST)
+            {
+                player.Money = player.Money-HINT_COST;
+                lCoins.Text="Coins : "+player.Money.ToString();
+                BlockCards();
+                foreach (Card card in board.cards)
+                {
+                    if (cardsTurned[(int)card.Label.Tag] == false)
+                        card.Label.Image = card.FrontImage;
+                }
+                tHints.Start();
+            }
+        }
+
+        private void tSeconds_Tick(object sender, EventArgs e)
+        {
+            time++;
+        }
+
+        private void tHints_Tick(object sender, EventArgs e)
+        {
+            tHints.Stop();
+            foreach (Card card in board.cards)
+            {
+                if (cardsTurned[(int)card.Label.Tag] == false)
+                    card.Label.Image = card.BackImage;
+            }
+            UnblockCards();
         }
 
         private void SinglePlayerForm_Load(object sender, EventArgs e)

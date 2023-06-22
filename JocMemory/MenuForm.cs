@@ -22,7 +22,7 @@ namespace JocMemory
         {
             InitializeComponent();
             player = fLogin.sqlUtility.GetPlayerByUsername(username);
-            lCoins.Text = player.Money.ToString();
+            lCoins.Text = "Coins : "+ player.Money.ToString();
             lPlayerName.Text += player.Username;
             player.Quests = fLogin.sqlUtility.GetQuestForPlayer(player.PlayerId);
         }
