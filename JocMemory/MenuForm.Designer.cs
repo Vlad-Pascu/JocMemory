@@ -73,6 +73,7 @@
             this.btnMultiPlayer.TabStop = false;
             this.btnMultiPlayer.Text = "MultiPlayer";
             this.btnMultiPlayer.UseVisualStyleBackColor = false;
+            this.btnMultiPlayer.Click += new System.EventHandler(this.btnMultiPlayer_Click);
             // 
             // btnHelpResults
             // 

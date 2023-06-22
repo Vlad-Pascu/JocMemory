@@ -51,6 +51,9 @@
     <Reference Include="MySql.Data, Version=8.0.33.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.33\lib\net48\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleTCP, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleTCP.1.0.24\lib\net45\SimpleTCP.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -88,6 +91,12 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="ConnectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectionForm.Designer.cs">
+      <DependentUpon>ConnectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EndGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +104,12 @@
       <DependentUpon>EndGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EndGameStats.cs" />
+    <Compile Include="MultiPlayerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultiPlayerForm.Designer.cs">
+      <DependentUpon>MultiPlayerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SinglePlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,7 +128,6 @@
     <Compile Include="MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MultiPlayerGame.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +140,9 @@
     </Compile>
     <Compile Include="Requirement.cs" />
     <Compile Include="SQLUtility.cs" />
+    <EmbeddedResource Include="ConnectionForm.resx">
+      <DependentUpon>ConnectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EndGameForm.resx">
       <DependentUpon>EndGameForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiPlayerForm.resx">
+      <DependentUpon>MultiPlayerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SinglePlayerForm.resx">
       <DependentUpon>SinglePlayerForm.cs</DependentUpon>

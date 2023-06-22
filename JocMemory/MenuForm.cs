@@ -54,5 +54,12 @@ namespace JocMemory
             fSingleGame fSingleGame= new fSingleGame(player);
             this.Hide();
         }
+
+        private void btnMultiPlayer_Click(object sender, EventArgs e)
+        {
+            fConnection fConnection= new fConnection(player);
+            fConnection.Show();
+            this.Hide();
+        }
     }
 }
