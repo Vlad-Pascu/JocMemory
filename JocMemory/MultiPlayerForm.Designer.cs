@@ -37,9 +37,7 @@
             this.lScore = new System.Windows.Forms.Label();
             this.pGame = new System.Windows.Forms.Panel();
             this.listImages = new System.Windows.Forms.ImageList(this.components);
-            this.tSwitch2 = new System.Windows.Forms.Timer(this.components);
             this.tHints = new System.Windows.Forms.Timer(this.components);
-            this.btnStart = new System.Windows.Forms.Button();
             this.tSwitch1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -76,12 +74,13 @@
             this.btnQuit.TabStop = false;
             this.btnQuit.Text = "Quit Game";
             this.btnQuit.UseVisualStyleBackColor = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // btnHints
             // 
             this.btnHints.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnHints.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHints.Location = new System.Drawing.Point(423, 498);
+            this.btnHints.Location = new System.Drawing.Point(319, 498);
             this.btnHints.Name = "btnHints";
             this.btnHints.Size = new System.Drawing.Size(147, 39);
             this.btnHints.TabIndex = 8;
@@ -145,27 +144,9 @@
             this.listImages.Images.SetKeyName(26, "12.bmp");
             this.listImages.Images.SetKeyName(27, "13.bmp");
             // 
-            // tSwitch2
-            // 
-            this.tSwitch2.Interval = 1000;
-            this.tSwitch2.Tick += new System.EventHandler(this.tSwitch2_Tick);
-            // 
             // tHints
             // 
             this.tHints.Interval = 1500;
-            // 
-            // btnStart
-            // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btnStart.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(222, 498);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(147, 39);
-            this.btnStart.TabIndex = 12;
-            this.btnStart.TabStop = false;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // tSwitch1
             // 
@@ -178,7 +159,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lCoins);
             this.Controls.Add(this.lPlayerName);
             this.Controls.Add(this.btnQuit);
@@ -187,6 +167,7 @@
             this.Controls.Add(this.pGame);
             this.Name = "fMultiGame";
             this.Text = "MultiPlayerForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fMultiGame_FormClosed);
             this.Load += new System.EventHandler(this.MultiPlayerForm_Load);
             this.ResumeLayout(false);
 
@@ -201,9 +182,7 @@
         public System.Windows.Forms.Label lScore;
         public System.Windows.Forms.Panel pGame;
         public System.Windows.Forms.ImageList listImages;
-        private System.Windows.Forms.Timer tSwitch2;
         private System.Windows.Forms.Timer tHints;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Timer tSwitch1;
     }
 }

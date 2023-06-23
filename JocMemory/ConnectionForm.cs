@@ -28,11 +28,13 @@ namespace JocMemory
         private void btnServer_Click(object sender, EventArgs e)
         {
             fMultiGame fMulti = new fMultiGame(player, true);
+            this.Close();
         }
 
         private void btnClient_Click(object sender, EventArgs e)
         {
             fMultiGame fMulti = new fMultiGame(player, false);
+            this.Close();
         }
 
     }

@@ -66,6 +66,7 @@
             this.Controls.Add(this.listEnd);
             this.Name = "fEndGame";
             this.Text = "EndGameForm";
+            this.Load += new System.EventHandler(this.fEndGame_Load);
             this.ResumeLayout(false);
 
         }

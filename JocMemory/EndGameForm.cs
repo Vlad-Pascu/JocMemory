@@ -24,7 +24,8 @@ namespace JocMemory
             this.player = player;
             listEnd.Items.Add("Congratulations!!!!");
             listEnd.Items.Add("Your stats : ");
-            listEnd.Items.Add("Time : " + endGameStats.Time.ToString() + " seconds");
+            if(endGameStats.Time!=0)
+                listEnd.Items.Add("Time : " + endGameStats.Time.ToString() + " seconds");
             listEnd.Items.Add("Moves : " + endGameStats.Moves.ToString());
             listEnd.Items.Add("Score : " + endGameStats.Score.ToString());
             CheckForCompletedQuests(player.Quests, endGameStats);
@@ -83,6 +84,11 @@ namespace JocMemory
             fMenu fMenu = new fMenu(player.Username);
             fMenu.Show();
             this.Close();
+        }
+
+        private void fEndGame_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

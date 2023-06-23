@@ -45,9 +45,10 @@ namespace JocMemory
         static NetworkStream stream;
         static StreamReader streamReader;
         static StreamWriter streamWriter;
-        static public string message="";
+        static public string message = "";
         static bool clientConnected;
         static bool boardReceived = false;
+        bool isServer;
 
         public fMultiGame()
         {
@@ -56,13 +57,14 @@ namespace JocMemory
 
         public fMultiGame(Player player, bool isServer)
         {
-            CheckForIllegalCrossThreadCalls=false;
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             c1 = new Card();
             c2 = new Card();
             this.player = player;
             lCoins.Text = "Coins : " + player.Money.ToString();
             lPlayerName.Text = player.Username;
+            this.isServer = isServer;
             if (isServer == true)
             {
                 turnOfPlayer = true;
@@ -93,11 +95,14 @@ namespace JocMemory
                     Debug.WriteLine(message);
                     while (true)
                     {
-                        ReceiveData();
+                        if(client.Connected)
+                            ReceiveData();
+                        else
+                            client.Close();
                         //client.Close();
                         //Console.WriteLine("Client disconnected.");
                     }
-                    
+
                 });
             }
             else
@@ -112,7 +117,7 @@ namespace JocMemory
                     Task t = Task.Factory.StartNew(() =>
                     {
                         client.Connect(ipAddress, port);
-                        
+
                         Debug.WriteLine("Connected to server.");
                         clientConnected = true;
                         stream = client.GetStream();
@@ -139,7 +144,7 @@ namespace JocMemory
                     Console.WriteLine("An error occurred: " + ex.Message);
                 }
             }
-            
+
             this.Show();
         }
 
@@ -151,37 +156,23 @@ namespace JocMemory
                 string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 this.player2Id = Convert.ToInt32(data[1]);
             }
-            else if(message.StartsWith("Tabla "))
+            else if (message.StartsWith("Tabla "))
             {
                 Debug.WriteLine(message);
-                string[] data = message.Split(new char[] {' '},StringSplitOptions.RemoveEmptyEntries);
-                for(int i=1;i<data.Length;i++)
+                string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 1; i < data.Length; i++)
                 {
                     cardsOrder += data[i] + " ";
-                }  
-                boardReceived= true;
+                }
+                boardReceived = true;
                 SendData("Gata de joc");
             }
-            /*else if (message.StartsWith("Inchide "))
-            {
-                string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                int tag1 = Convert.ToInt32(data[1]);
-                board.cards[tag1].Label.Image = board.cards[tag1].BackImage;
-                int tag2 = Convert.ToInt32(data[2]);
-                board.cards[tag2].Label.Image = board.cards[tag2].BackImage;
-
-            }*/
             else
             {
                 string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 int tag = Convert.ToInt32(data[0]);
                 ShowCard(tag);
             }
-        }
-        private void SendDataToServer(string message)
-        {
-            streamWriter.WriteLine(message);
-            streamWriter.Flush();
         }
 
         private void SendData(string message)
@@ -204,18 +195,15 @@ namespace JocMemory
                 string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             }
-            /*else if(message.StartsWith("Inchide "))
+            else if (message.StartsWith("Inchide "))
             {
-                string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                int tag1= Convert.ToInt32(data[1]);
-                board.cards[tag1].Label.Image = board.cards[tag1].BackImage;
-                int tag2 = Convert.ToInt32(data[2]);
-                board.cards[tag2].Label.Image = board.cards[tag2].BackImage;         
-            }*/
+                client.Close();
+                this.Close();   
+            }
             else
             {
                 string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                int tag= Convert.ToInt32(data[0]);
+                int tag = Convert.ToInt32(data[0]);
                 ShowCard(tag);
             }
         }
@@ -260,7 +248,7 @@ namespace JocMemory
                         tSwitch1.Start();
                         //SendData("Inchide "+ c1.Label.Tag+ " "+c2.Label.Tag);
                     }
-                        
+
                     UnblockCards();
                     labelsClicked = 0;
                     moves++;
@@ -299,22 +287,6 @@ namespace JocMemory
             }
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tSwitch2_Tick(object sender, EventArgs e)
-        {
-            tSwitch2.Stop();
-            board.cards[(int)c1.Label.Tag].Label.Image = board.cards[(int)c1.Label.Tag].BackImage;
-            board.cards[(int)c2.Label.Tag].Label.Image = board.cards[(int)c2.Label.Tag].BackImage;
-            c1.Label.Enabled = true;
-            c2.Label.Enabled = true;
-            c1 = new Card();
-            c2 = new Card();
-            c1.Index = c2.Index = -1;
-        }
 
         private void GameEnded()
         {
@@ -323,6 +295,8 @@ namespace JocMemory
                 if (b == false)
                     return;
             }
+            if (isServer == true)
+                fLogin.sqlUtility.AddMultiPlayerResult(player.PlayerId, player2Id, this.score);
             EndGameStats endGameStats = new EndGameStats(moves, time, score, multiplayer);
             fEndGame fEndGame = new fEndGame(player, endGameStats);
             this.Close();
@@ -345,6 +319,21 @@ namespace JocMemory
             c1.Index = c2.Index = -1;
         }
 
+        private void fMultiGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(client.Connected)
+                SendData("Inchide ");
+            Thread.Sleep(2000);
+            client.Close();
+            fMenu fMenu = new fMenu(player.Username);
+            fMenu.Show();
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         public void ShowCard(int tag)
         {
             board.cards[tag].Label.Image = board.cards[tag].FrontImage;
@@ -361,7 +350,6 @@ namespace JocMemory
                 c2 = board.cards[tag] as Card;
                 c2.Label.Tag = tag;
             }
-            Debug.WriteLine(labelsClicked);
             if (labelsClicked == READY_FOR_CHECK)
             {
                 BlockCards();
@@ -371,8 +359,6 @@ namespace JocMemory
                     cardsTurned[(int)c2.Label.Tag] = true;
                     c1 = new Card();
                     c2 = new Card();
-                    score++;
-                    lScore.Text = "Score : " + score.ToString();
                 }
                 else
                 {
@@ -386,7 +372,7 @@ namespace JocMemory
                     c2 = new Card();
                     c1.Index = c2.Index = -1;
                 }
-                    
+
                 UnblockCards();
                 labelsClicked = 0;
                 moves++;

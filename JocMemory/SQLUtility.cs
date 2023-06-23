@@ -151,5 +151,16 @@ namespace JocMemory
             adapter.InsertCommand.ExecuteNonQuery();
             cmd.Dispose();
         }
+
+        internal void AddMultiPlayerResult(int player1Id, int player2Id, int score)
+        {
+            adapter = new MySqlDataAdapter();
+            string stringSql = " INSERT INTO multiplayer_result (player1Id,player2Id,score_player1,score_player2) " +
+                                "VALUES (" + player1Id + "," + player2Id + "," + score + ","+ (14-score)+")";
+            cmd = new MySqlCommand(stringSql, con);
+            adapter.InsertCommand = cmd;
+            adapter.InsertCommand.ExecuteNonQuery();
+            cmd.Dispose();
+        }
     }
 }

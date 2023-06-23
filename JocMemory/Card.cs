@@ -65,7 +65,7 @@ namespace JocMemory
                 index = tempIndex;
                 frontImage = (Bitmap)imageList.Images[index];
                 fMultiGame.message += index.ToString() + " ";
-                index = index % 14;
+                index = index % (Board.NR_CARDS/2);
                 Debug.Write(index + " ");
             }
             else
@@ -74,7 +74,7 @@ namespace JocMemory
                 indexUsed[tempIndex] = 1;
                 index = tempIndex;
                 frontImage= (Bitmap)imageList.Images[index];
-                index = index % 14;
+                index = index % (Board.NR_CARDS / 2);
                 Debug.Write(index + " ");
             }
 
