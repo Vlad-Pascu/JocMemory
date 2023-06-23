@@ -86,6 +86,7 @@
             this.btnHelpResults.TabStop = false;
             this.btnHelpResults.Text = "Help/Results";
             this.btnHelpResults.UseVisualStyleBackColor = false;
+            this.btnHelpResults.Click += new System.EventHandler(this.btnHelpResults_Click);
             // 
             // btnExit
             // 

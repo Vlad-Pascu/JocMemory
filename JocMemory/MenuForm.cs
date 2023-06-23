@@ -61,5 +61,12 @@ namespace JocMemory
             fConnection.Show();
             this.Hide();
         }
+
+        private void btnHelpResults_Click(object sender, EventArgs e)
+        {
+            fHelpResult fHelpResult= new fHelpResult(player);
+            fHelpResult.Show();
+            this.Hide();
+        }
     }
 }

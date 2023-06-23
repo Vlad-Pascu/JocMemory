@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace JocMemory
 {
@@ -161,6 +162,74 @@ namespace JocMemory
             adapter.InsertCommand = cmd;
             adapter.InsertCommand.ExecuteNonQuery();
             cmd.Dispose();
+        }
+
+        internal List<SingleResults> GetSingleResults(Player player)
+        {
+            List<SingleResults> results= new List<SingleResults>();
+            string stringSql = "SELECT * FROM singleplayer_result "+
+                                "WHERE playerId = "+player.PlayerId;
+            cmd = new MySqlCommand(stringSql, con);
+            reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    SingleResults result = new SingleResults();
+                    result.ResultId = reader.GetInt32(0);
+                    result.PlayerId = reader.GetInt32(1);
+                    result.Score= reader.GetInt32(2);
+                    result.Time= reader.GetInt32(3);
+                    results.Add(result);
+                }
+            }
+            reader.Close();
+            cmd.Dispose();
+            return results;
+        }
+
+        internal List<MultiResults> GetMultiResults(Player player)
+        {
+            List<MultiResults> results = new List<MultiResults>();
+            string stringSql = "SELECT * FROM multiplayer_result " +
+                                "WHERE player1Id = " + player.PlayerId + " OR player2Id =  "+player.PlayerId;
+            cmd = new MySqlCommand(stringSql, con);
+            reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    MultiResults result = new MultiResults();
+                    result.ResultId = reader.GetInt32(0);
+                    result.Player1Id = reader.GetInt32(1);
+                    result.Player2Id = reader.GetInt32(2);
+                    result.Score1 = reader.GetInt32(3);
+                    result.Score2 = reader.GetInt32(4);
+                    results.Add(result);
+                }
+            }
+            reader.Close();
+            cmd.Dispose();
+            return results;
+        }
+
+        internal string GetNameById(int player2Id)
+        {
+            string name="";
+            string stringSql = "SELECT username FROM player " +
+                                "WHERE playerId = " + player2Id;
+            cmd = new MySqlCommand(stringSql, con);
+            reader = cmd.ExecuteReader();
+            if(reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    name=reader.GetString(0);
+                }
+            }
+            reader.Close();
+            cmd.Dispose();
+            return name;
         }
     }
 }
