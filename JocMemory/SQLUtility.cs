@@ -17,6 +17,7 @@ namespace JocMemory
         MySqlDataReader reader;
         MySqlDataAdapter adapter;
         const int START_COINS = 500;
+        const int MAX_SCORE = 14;
         public void Connect()
         {
             string connString = "server=localhost;uid=root;pwd=GeNesisHalo21;database=joc_memory";
@@ -157,7 +158,7 @@ namespace JocMemory
         {
             adapter = new MySqlDataAdapter();
             string stringSql = " INSERT INTO multiplayer_result (player1Id,player2Id,score_player1,score_player2) " +
-                                "VALUES (" + player1Id + "," + player2Id + "," + score + ","+ (14-score)+")";
+                                "VALUES (" + player1Id + "," + player2Id + "," + score + ","+ (MAX_SCORE-score)+")";
             cmd = new MySqlCommand(stringSql, con);
             adapter.InsertCommand = cmd;
             adapter.InsertCommand.ExecuteNonQuery();

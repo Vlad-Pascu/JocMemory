@@ -33,11 +33,7 @@ namespace JocMemory
         int multiplayer = 1;
         int player2Id;
         bool turnOfPlayer;
-        string ip;
-        int port;
         public static string cardsOrder = "";
-        public static bool ready;
-        public static bool orderDone;
         bool boardBuilt = false;
         public static int tagFromNetwork;
         static TcpListener server;
@@ -119,18 +115,15 @@ namespace JocMemory
                         client.Connect(ipAddress, port);
 
                         Debug.WriteLine("Connected to server.");
-                        clientConnected = true;
                         stream = client.GetStream();
                         streamReader = new StreamReader(stream);
                         streamWriter = new StreamWriter(stream);
                         SendData("Hello " + player.PlayerId);
-                        // Receive response from the server
+
                         while (true)
                             ReceiveDataFromServer();
 
-                        // Close the connection
-                        //client.Close();
-                        //Console.WriteLine("Connection closed.");
+
                     });
                     while (boardReceived == false) ;
                     board.BuildBoard(pGame, listImages, cardsOrder);
@@ -165,7 +158,6 @@ namespace JocMemory
                     cardsOrder += data[i] + " ";
                 }
                 boardReceived = true;
-                SendData("Gata de joc");
             }
             else
             {
@@ -189,11 +181,6 @@ namespace JocMemory
                 string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 this.player2Id = Convert.ToInt32(data[1]);
                 SendData("Hello " + player.PlayerId);
-            }
-            else if (message.StartsWith("Gata "))
-            {
-                string[] data = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
             }
             else if (message.StartsWith("Inchide "))
             {
@@ -334,6 +321,17 @@ namespace JocMemory
             this.Close();
         }
 
+        private void tHints_Tick(object sender, EventArgs e)
+        {
+            tHints.Stop();
+            foreach (Card card in board.cards)
+            {
+                if (cardsTurned[(int)card.Label.Tag] == false)
+                    card.Label.Image = card.BackImage;
+            }
+            UnblockCards();
+        }
+
         public void ShowCard(int tag)
         {
             board.cards[tag].Label.Image = board.cards[tag].FrontImage;
@@ -375,7 +373,6 @@ namespace JocMemory
 
                 UnblockCards();
                 labelsClicked = 0;
-                moves++;
                 GameEnded();
                 turnOfPlayer = true;
             }

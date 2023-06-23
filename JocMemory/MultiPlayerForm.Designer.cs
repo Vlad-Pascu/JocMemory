@@ -147,6 +147,7 @@
             // tHints
             // 
             this.tHints.Interval = 1500;
+            this.tHints.Tick += new System.EventHandler(this.tHints_Tick);
             // 
             // tSwitch1
             // 
