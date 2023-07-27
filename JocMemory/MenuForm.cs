@@ -12,7 +12,7 @@ namespace JocMemory
 {
     public partial class fMenu : Form
     {
-        Player player;
+        Player player=null;
         public fMenu()
         {
             InitializeComponent();
@@ -22,9 +22,24 @@ namespace JocMemory
         {
             InitializeComponent();
             player = fLogin.sqlUtility.GetPlayerByUsername(username);
-            lCoins.Text = "Coins : "+ player.Money.ToString();
-            lPlayerName.Text += player.Username;
-            player.Quests = fLogin.sqlUtility.GetQuestForPlayer(player.PlayerId);
+            if (username.StartsWith("Guest"))
+            {
+                player = new Player();
+                player.Username = "Guest";
+                player.Money= 0;
+                player.Quests = null;
+                lCoins.Text = "Coins : "+ player.Money;
+                lPlayerName.Text += player.Username;
+                btnMultiPlayer.Enabled= false;
+                btnQuests.Enabled= false;
+            }
+            else
+            {
+                lCoins.Text = "Coins : " + player.Money;
+                lPlayerName.Text += player.Username;
+                player.Quests = fLogin.sqlUtility.GetQuestForPlayer(player.PlayerId);
+            }
+            
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
@@ -39,7 +54,8 @@ namespace JocMemory
 
         private void fMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            //System.Windows.Forms.Application.Exit();
+            this.Hide();
         }
 
         private void btnQuests_Click(object sender, EventArgs e)
@@ -67,6 +83,13 @@ namespace JocMemory
             fHelpResult fHelpResult= new fHelpResult(player);
             fHelpResult.Show();
             this.Hide();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            fLogin fLogin = new fLogin();
+            fLogin.Show();
+            this.Close();
         }
     }
 }

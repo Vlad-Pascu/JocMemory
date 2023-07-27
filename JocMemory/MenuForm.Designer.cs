@@ -144,6 +144,7 @@
             this.btnLogout.TabStop = false;
             this.btnLogout.Text = "Log out";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // fMenu
             // 

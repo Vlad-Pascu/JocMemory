@@ -45,6 +45,7 @@
             // 
             // listSingleResults
             // 
+            this.listSingleResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listSingleResults.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listSingleResults.FormattingEnabled = true;
             this.listSingleResults.ItemHeight = 23;
@@ -55,6 +56,7 @@
             // 
             // listMultiResults
             // 
+            this.listMultiResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.listMultiResults.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listMultiResults.FormattingEnabled = true;
             this.listMultiResults.ItemHeight = 23;

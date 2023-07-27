@@ -193,7 +193,8 @@ namespace JocMemory
         {
             List<MultiResults> results = new List<MultiResults>();
             string stringSql = "SELECT * FROM multiplayer_result " +
-                                "WHERE player1Id = " + player.PlayerId + " OR player2Id =  "+player.PlayerId;
+                                "WHERE player1Id = " + player.PlayerId + 
+                                " OR player2Id =  "+player.PlayerId;
             cmd = new MySqlCommand(stringSql, con);
             reader = cmd.ExecuteReader();
             if (reader.HasRows)

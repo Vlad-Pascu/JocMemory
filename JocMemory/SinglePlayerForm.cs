@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,8 @@ namespace JocMemory
             c2 = new Card();
             this.player = player;
             lCoins.Text = "Coins : " + player.Money.ToString();
+            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            Debug.WriteLine(path);
             lPlayerName.Text = player.Username;
             this.Show();
             board.BuildBoard(pGame, listImages);
@@ -108,7 +112,7 @@ namespace JocMemory
                     return;
             }
             tSeconds.Stop();
-            EndGameStats endGameStats = new EndGameStats(moves,time,score,multiplayer);
+            EndGameStats endGameStats = new EndGameStats(moves, time, score, multiplayer);
             fEndGame fEndGame = new fEndGame(player, endGameStats);
             this.Close();
             //form result final plus verificare quest-uri
@@ -130,8 +134,8 @@ namespace JocMemory
         {
             if (player.Money >= HINT_COST)
             {
-                player.Money = player.Money-HINT_COST;
-                lCoins.Text="Coins : "+player.Money.ToString();
+                player.Money = player.Money - HINT_COST;
+                lCoins.Text = "Coins : " + player.Money.ToString();
                 BlockCards();
                 foreach (Card card in board.cards)
                 {
@@ -156,6 +160,13 @@ namespace JocMemory
                     card.Label.Image = card.BackImage;
             }
             UnblockCards();
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            fMenu fMenu = new fMenu(player.Username);
+            fMenu.Show();
+            this.Close();
         }
 
         private void SinglePlayerForm_Load(object sender, EventArgs e)

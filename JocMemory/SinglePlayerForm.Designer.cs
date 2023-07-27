@@ -88,6 +88,7 @@
             this.btnQuit.TabStop = false;
             this.btnQuit.Text = "Quit Game";
             this.btnQuit.UseVisualStyleBackColor = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // lPlayerName
             // 
